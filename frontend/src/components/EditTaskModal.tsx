@@ -1,0 +1,111 @@
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../app/store';
+import { updateTask } from '../features/taskSlice';
+import { fetchUsers } from '../features/userSlice';
+import type { Task } from '../types';
+import Modal from './Modal';
+import Input from './Input';
+import Textarea from './Textarea';
+import Select from './Select';
+import Button from './Button';
+import toast from 'react-hot-toast';
+
+interface EditTaskModalProps {
+  isOpen: boolean;
+  task: Task | null;
+  onClose: () => void;
+  onSuccess: () => void;
+}
+
+const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, task, onClose, onSuccess }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { users } = useSelector((state: RootState) => state.users);
+  const { loading } = useSelector((state: RootState) => state.tasks);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [assignedTo, setAssignedTo] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (isOpen && task) {
+      dispatch(fetchUsers());
+      setTitle(task.title);
+      setDescription(task.description || '');
+      setAssignedTo(task.assignedTo?._id || '');
+      setErrors({});
+    }
+  }, [isOpen, task, dispatch]);
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (!title.trim()) newErrors.title = 'Title is required';
+    if (!assignedTo) newErrors.assignedTo = 'Please select a user';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate() || !task) return;
+
+    try {
+      await dispatch(updateTask({ id: task._id, data: { title, description, assignedTo } })).unwrap();
+      toast.success('Task updated successfully');
+      onSuccess();
+      onClose();
+    } catch (err: any) {
+      toast.error(err || 'Failed to update task');
+    }
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title="Edit Task">
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <Input
+          label="Task title"
+          placeholder="Enter the task title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          error={errors.title}
+        />
+
+        <Textarea
+          label="Description"
+          rows={4}
+          placeholder="Briefly describe what needs to be done"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <Select
+          label="Assigned User Dropdown"
+          value={assignedTo}
+          onChange={(e) => setAssignedTo(e.target.value)}
+          error={errors.assignedTo}
+        >
+          <option value="">Assign to</option>
+          {users
+            .filter((u) => u.role === 'user')
+            .map((user) => (
+              <option key={user._id} value={user._id}>
+                {user.name} ({user.email})
+              </option>
+            ))}
+        </Select>
+
+        <div className="flex gap-3 pt-2">
+          <Button type="button" variant="outline" onClick={onClose} className="flex-1">
+            Cancel
+          </Button>
+          <Button type="submit" variant="primary" loading={loading} className="flex-1">
+            Save Changes
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  );
+};
+
+export default EditTaskModal;
