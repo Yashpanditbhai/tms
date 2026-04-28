@@ -11,7 +11,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
 
   return (
     <span
-      className={`inline-flex items-center justify-center w-[90px] py-1 rounded-full text-xs font-medium border ${colors.border} ${colors.text} bg-white`}
+      className={`inline-flex items-center justify-center w-[75px] md:w-[90px] py-1 rounded-full text-[10px] md:text-xs font-medium border ${colors.border} ${colors.text} bg-white`}
     >
       {label}
     </span>

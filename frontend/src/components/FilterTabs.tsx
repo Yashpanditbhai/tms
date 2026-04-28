@@ -14,12 +14,12 @@ const FilterTabs: React.FC<FilterTabsProps> = ({ activeFilter, onFilterChange })
   ];
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       {tabs.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onFilterChange(tab.value)}
-          className={`px-5 py-2 text-sm font-medium rounded-xl border transition-colors ${
+          className={`px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-xl border transition-colors ${
             activeFilter === tab.value
               ? 'border-[#5856D6] text-[#5856D6] bg-white'
               : 'border-gray-200 text-gray-300 bg-white hover:text-gray-400 hover:border-gray-300'

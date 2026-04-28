@@ -26,48 +26,48 @@ const TaskTable: React.FC<TaskTableProps> = ({ tasks, role, onView, onUpdateStat
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-[500px]">
           <thead>
             <tr className="border-b border-gray-200">
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Assigned To</th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Task Title</th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">
+              <th className="text-left px-4 md:px-6 py-3 text-xs font-semibold text-gray-400 tracking-wider">Task ID</th>
+              <th className="text-left px-4 md:px-6 py-3 text-xs font-semibold text-gray-400 tracking-wider">Task Title</th>
+              <th className="text-left px-4 md:px-6 py-3 text-xs font-semibold text-gray-400 tracking-wider hidden sm:table-cell">
                 {role === 'admin' ? 'Assigned To' : 'Assigned By'}
               </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Status</th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Created On</th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Actions</th>
+              <th className="text-left px-4 md:px-6 py-3 text-xs font-semibold text-gray-400 tracking-wider">Status</th>
+              <th className="text-left px-4 md:px-6 py-3 text-xs font-semibold text-gray-400 tracking-wider hidden md:table-cell">Created On</th>
+              <th className="text-left px-4 md:px-6 py-3 text-xs font-semibold text-gray-400 tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody>
             {tasks.map((task) => (
               <tr key={task._id} className="border-b border-dashed border-gray-200 last:border-b-0 hover:bg-gray-50/50 transition-colors">
-                <td className="px-6 py-4">
-                  <span className="text-sm font-medium text-gray-700">
+                <td className="px-4 md:px-6 py-3 md:py-4">
+                  <span className="text-xs md:text-sm font-medium text-gray-700">
                     #{task.taskId || task._id.slice(-6).toUpperCase()}
                   </span>
                 </td>
-                <td className="px-6 py-4">
-                  <span className="text-sm text-gray-900">{task.title}</span>
+                <td className="px-4 md:px-6 py-3 md:py-4">
+                  <span className="text-xs md:text-sm text-gray-900">{task.title}</span>
                 </td>
-                <td className="px-6 py-4">
-                  <span className="text-sm text-gray-600">
+                <td className="px-4 md:px-6 py-3 md:py-4 hidden sm:table-cell">
+                  <span className="text-xs md:text-sm text-gray-600">
                     {role === 'admin' ? task.assignedTo?.name || 'Unassigned' : task.createdBy?.name || 'Unknown'}
                   </span>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-4 md:px-6 py-3 md:py-4">
                   <StatusBadge status={task.status} />
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-4 md:px-6 py-3 md:py-4 hidden md:table-cell">
                   <span className="text-sm text-gray-500">{formatDate(task.createdAt)}</span>
                 </td>
-                <td className="px-6 py-4">
-                  <div className="flex items-center gap-2">
-                    <Button variant="outline" className="!py-1.5 !px-4 !text-xs !rounded-lg" onClick={() => onView(task)}>
+                <td className="px-4 md:px-6 py-3 md:py-4">
+                  <div className="flex items-center gap-1.5">
+                    <Button variant="outline" className="!py-1 !px-2.5 !text-[11px] md:!py-1.5 md:!px-4 md:!text-xs !rounded-lg" onClick={() => onView(task)}>
                       View
                     </Button>
                     {role === 'user' && onUpdateStatus && (
-                      <Button variant="primary" className="!py-1.5 !px-4 !text-xs !rounded-lg" onClick={() => onUpdateStatus(task)}>
+                      <Button variant="primary" className="!py-1 !px-2.5 !text-[11px] md:!py-1.5 md:!px-4 md:!text-xs !rounded-lg" onClick={() => onUpdateStatus(task)}>
                         Update Status
                       </Button>
                     )}

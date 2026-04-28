@@ -80,21 +80,21 @@ const AdminTasksPage: React.FC = () => {
       </div>
 
       {/* Filters + Create Task */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
         <FilterTabs activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-        <Button variant="primary" className="!rounded-xl" onClick={() => setShowCreate(true)}>
+        <Button variant="primary" className="!rounded-xl w-full sm:w-auto" onClick={() => setShowCreate(true)}>
           Create Task
         </Button>
       </div>
 
       {/* Table + Side Panel */}
-      <div className="flex gap-4">
+      <div className="flex flex-col lg:flex-row gap-4">
         <div className="flex-1 min-w-0">
           <TaskTable tasks={filteredTasks} role="admin" onView={handleView} />
         </div>
 
         {selectedTask && (
-          <div className="w-[35%] shrink-0">
+          <div className="w-full lg:w-[35%] shrink-0">
             <TaskDetailsPanel
               task={selectedTask}
               onClose={handleClosePanel}

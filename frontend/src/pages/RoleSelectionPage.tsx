@@ -26,7 +26,7 @@ const RoleSelectionPage: React.FC = () => {
     <div className="h-screen flex overflow-hidden">
       <AuthIllustration />
 
-      <div className="flex-1 flex items-center justify-center p-8 bg-white">
+      <div className="flex-1 flex items-center justify-center px-4 sm:p-8 bg-white overflow-y-auto">
         <div className="w-full max-w-[520px]">
           <div className="text-center mb-9">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -39,7 +39,7 @@ const RoleSelectionPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {/* Admin Card */}
             <div className="border-2 border-indigo-200 rounded-2xl p-7 cursor-pointer transition-all hover:border-indigo-400 hover:shadow-lg">
               <h3 className="text-xl font-bold text-indigo-600 mb-2">
