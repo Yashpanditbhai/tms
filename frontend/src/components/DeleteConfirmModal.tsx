@@ -4,7 +4,7 @@ import type { AppDispatch } from '../app/store';
 import { deleteTask } from '../features/taskSlice';
 import type { Task } from '../types';
 import Modal from './Modal';
-import Button from './Button';
+import ModalFooter from './ModalFooter';
 import toast from 'react-hot-toast';
 
 interface DeleteConfirmModalProps {
@@ -14,18 +14,12 @@ interface DeleteConfirmModalProps {
   onSuccess: () => void;
 }
 
-const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
-  isOpen,
-  task,
-  onClose,
-  onSuccess,
-}) => {
+const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({ isOpen, task, onClose, onSuccess }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
     if (!task) return;
-
     setLoading(true);
     try {
       await dispatch(deleteTask(task._id)).unwrap();
@@ -45,15 +39,14 @@ const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
         <p className="text-sm text-gray-400 text-center">
           This action cannot be undone. The task will be permanently removed.
         </p>
-
-        <div className="flex gap-3">
-          <Button type="button" variant="outline" onClick={onClose} className="flex-1">
-            Cancel
-          </Button>
-          <Button type="button" variant="danger" loading={loading} onClick={handleDelete} className="flex-1">
-            Delete Task
-          </Button>
-        </div>
+        <ModalFooter
+          onCancel={onClose}
+          onSubmit={handleDelete}
+          submitLabel="Delete Task"
+          submitVariant="danger"
+          loading={loading}
+          type="button"
+        />
       </div>
     </Modal>
   );

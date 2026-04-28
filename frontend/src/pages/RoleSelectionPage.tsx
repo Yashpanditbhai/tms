@@ -5,14 +5,11 @@ import type { AppDispatch } from '../app/store';
 import { setRole } from '../features/authSlice';
 import AuthIllustration from '../components/AuthIllustration';
 import api from '../services/api';
-import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 
 const RoleSelectionPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { user } = useAuth();
-
   const handleRoleSelect = async (role: 'admin' | 'user') => {
     try {
       await api.patch('/auth/select-role', { role });

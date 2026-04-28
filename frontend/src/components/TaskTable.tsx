@@ -2,6 +2,7 @@ import React from 'react';
 import type { Task } from '../types';
 import StatusBadge from './StatusBadge';
 import Button from './Button';
+import { formatDate } from '../utils/formatDate';
 
 interface TaskTableProps {
   tasks: Task[];
@@ -11,14 +12,6 @@ interface TaskTableProps {
 }
 
 const TaskTable: React.FC<TaskTableProps> = ({ tasks, role, onView, onUpdateStatus }) => {
-  const formatDate = (dateString: string) => {
-    const d = new Date(dateString);
-    const day = String(d.getDate()).padStart(2, '0');
-    const month = d.toLocaleDateString('en-US', { month: 'short' });
-    const year = d.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
-
   if (tasks.length === 0) {
     return (
       <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
@@ -36,32 +29,19 @@ const TaskTable: React.FC<TaskTableProps> = ({ tasks, role, onView, onUpdateStat
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-200">
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">
-                Assigned To
-              </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">
-                Task Title
-              </th>
+              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Assigned To</th>
+              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Task Title</th>
               <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">
                 {role === 'admin' ? 'Assigned To' : 'Assigned By'}
               </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">
-                Status
-              </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">
-                Created On
-              </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">
-                Actions
-              </th>
+              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Status</th>
+              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Created On</th>
+              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-400 tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody>
             {tasks.map((task) => (
-              <tr
-                key={task._id}
-                className="border-b border-dashed border-gray-200 last:border-b-0 hover:bg-gray-50/50 transition-colors"
-              >
+              <tr key={task._id} className="border-b border-dashed border-gray-200 last:border-b-0 hover:bg-gray-50/50 transition-colors">
                 <td className="px-6 py-4">
                   <span className="text-sm font-medium text-gray-700">
                     #{task.taskId || task._id.slice(-6).toUpperCase()}
@@ -72,9 +52,7 @@ const TaskTable: React.FC<TaskTableProps> = ({ tasks, role, onView, onUpdateStat
                 </td>
                 <td className="px-6 py-4">
                   <span className="text-sm text-gray-600">
-                    {role === 'admin'
-                      ? task.assignedTo?.name || 'Unassigned'
-                      : task.createdBy?.name || 'Unknown'}
+                    {role === 'admin' ? task.assignedTo?.name || 'Unassigned' : task.createdBy?.name || 'Unknown'}
                   </span>
                 </td>
                 <td className="px-6 py-4">

@@ -7,7 +7,7 @@ import Modal from './Modal';
 import Input from './Input';
 import Textarea from './Textarea';
 import Select from './Select';
-import Button from './Button';
+import ModalFooter from './ModalFooter';
 import toast from 'react-hot-toast';
 
 interface CreateTaskModalProps {
@@ -61,46 +61,15 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ isOpen, onClose, onSu
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Create Task">
       <form onSubmit={handleSubmit} className="space-y-5">
-        <Input
-          label="Task title"
-          placeholder="Enter the task title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          error={errors.title}
-        />
-
-        <Textarea
-          label="Description"
-          rows={4}
-          placeholder="Briefly describe what needs to be done"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-
-        <Select
-          label="Assigned User Dropdown"
-          value={assignedTo}
-          onChange={(e) => setAssignedTo(e.target.value)}
-          error={errors.assignedTo}
-        >
+        <Input label="Task title" placeholder="Enter the task title" value={title} onChange={(e) => setTitle(e.target.value)} error={errors.title} />
+        <Textarea label="Description" rows={4} placeholder="Briefly describe what needs to be done" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <Select label="Assigned User Dropdown" value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} error={errors.assignedTo}>
           <option value="">Assign to</option>
-          {users
-            .filter((u) => u.role === 'user')
-            .map((user) => (
-              <option key={user._id} value={user._id}>
-                {user.name} ({user.email})
-              </option>
-            ))}
+          {users.filter((u) => u.role === 'user').map((user) => (
+            <option key={user._id} value={user._id}>{user.name} ({user.email})</option>
+          ))}
         </Select>
-
-        <div className="flex gap-3 pt-2">
-          <Button type="button" variant="outline" onClick={onClose} className="flex-1">
-            Cancel
-          </Button>
-          <Button type="submit" variant="primary" loading={loading} className="flex-1">
-            Create Task
-          </Button>
-        </div>
+        <ModalFooter onCancel={onClose} submitLabel="Create Task" loading={loading} />
       </form>
     </Modal>
   );

@@ -4,7 +4,6 @@
   "description": "Task Management System",
   "scripts": {
     "build": "cd frontend && npm install && npm run build && cd ../backend && npm install",
-    "start": "cd backend && npm start",
-    "seed": "cd backend && npm run seed"
+    "start": "cd backend && npm start"
   }
 }
