@@ -41,7 +41,7 @@ const TaskTable: React.FC<TaskTableProps> = ({ tasks, role, onView, onUpdateStat
           </thead>
           <tbody>
             {tasks.map((task) => (
-              <tr key={task._id} className="border-b border-dashed border-gray-200 last:border-b-0 hover:bg-gray-50/50 transition-colors">
+              <tr key={task._id} className="border-b border-dashed border-gray-200 last:border-b-0 hover:bg-gray-50 transition-all duration-300">
                 <td className="px-4 md:px-6 py-3 md:py-4">
                   <span className="text-xs md:text-sm font-medium text-gray-700">
                     #{task.taskId || task._id.slice(-6).toUpperCase()}

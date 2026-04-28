@@ -22,6 +22,7 @@ router.get('/stats', getTaskStats);
 router.get('/my-tasks', getMyTasks);
 router.get('/:id', getTaskById);
 router.put('/:id', validate(updateTaskSchema), updateTask);
+router.patch('/:id/status', updateTask);
 router.delete('/:id', requireRole('admin'), deleteTask);
 
 export default router;

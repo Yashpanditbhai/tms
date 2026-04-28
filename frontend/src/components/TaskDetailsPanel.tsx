@@ -24,7 +24,7 @@ const TaskDetailsPanel: React.FC<TaskDetailsPanelProps> = ({
   const colors = statusColors[task.status] || statusColors.pending;
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl overflow-y-auto">
+    <div className="bg-white border border-gray-200 rounded-xl overflow-y-auto animate-slide-in-right">
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-bold text-gray-900">Task Details</h3>

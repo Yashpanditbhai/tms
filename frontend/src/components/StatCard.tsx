@@ -24,7 +24,7 @@ const StatCard: React.FC<StatCardProps> = ({ label, sublabel, value, color }) =>
 
   return (
     <div
-      className="bg-white overflow-hidden"
+      className="bg-white overflow-hidden animate-fade-in-up"
       style={{
         borderLeft: `3px solid ${borderColorValues[color]}`,
         maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',

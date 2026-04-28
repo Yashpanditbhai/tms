@@ -30,9 +30,9 @@ const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
-      <div className="fixed inset-0 bg-black/50 transition-opacity" onClick={onClose} />
-      <div className={`relative bg-white rounded-t-xl sm:rounded-xl shadow-xl ${maxWidth} w-full sm:mx-4 z-10 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto`}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 bg-black/50 animate-fade-in" onClick={onClose} />
+      <div className={`relative bg-white rounded-xl shadow-xl ${maxWidth} w-full z-10 max-h-[90vh] overflow-y-auto animate-scale-in`}>
         {title && (
           <div className="flex items-center justify-between px-4 sm:px-6 pt-5 sm:pt-6 pb-2">
             <h3 className="text-lg sm:text-xl font-bold text-gray-900">{title}</h3>

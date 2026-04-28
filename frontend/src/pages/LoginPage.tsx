@@ -51,7 +51,7 @@ const LoginPage: React.FC = () => {
       <AuthIllustration />
 
       <div className="flex-1 flex items-center justify-center px-4 sm:p-8 bg-white">
-        <div className="w-full max-w-[420px]">
+        <div className="w-full max-w-[420px] animate-fade-in-up">
           <div className="text-center mb-9">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Welcome back 👋

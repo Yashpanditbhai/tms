@@ -22,7 +22,7 @@ const AdminDashboard: React.FC = () => {
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Dashboard</h1>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-8 animate-fade-in">
         <StatCard
           label="Total Tasks"
           sublabel="All tasks created so far"
@@ -51,10 +51,10 @@ const AdminDashboard: React.FC = () => {
 
       {/* Quick Actions */}
       <h2 className="text-base font-semibold text-gray-900 mb-4">Quick actions</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:w-[60%]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:w-[60%] animate-slide-up">
         <button
           onClick={() => navigate('/admin/tasks')}
-          className="bg-white rounded-xl border border-gray-200 p-5 text-left hover:shadow-md transition-shadow group"
+          className="bg-white rounded-xl border border-gray-200 p-5 text-left hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
         >
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 bg-indigo-50 rounded-xl flex items-center justify-center group-hover:bg-indigo-100 transition-colors">
@@ -72,7 +72,7 @@ const AdminDashboard: React.FC = () => {
 
         <button
           onClick={() => navigate('/admin/tasks?create=true')}
-          className="bg-white rounded-xl border border-gray-200 p-5 text-left hover:shadow-md transition-shadow group"
+          className="bg-white rounded-xl border border-gray-200 p-5 text-left hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
         >
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 bg-indigo-50 rounded-xl flex items-center justify-center group-hover:bg-indigo-100 transition-colors">

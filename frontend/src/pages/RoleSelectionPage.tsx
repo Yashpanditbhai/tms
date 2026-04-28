@@ -27,7 +27,7 @@ const RoleSelectionPage: React.FC = () => {
       <AuthIllustration />
 
       <div className="flex-1 flex items-center justify-center px-4 sm:p-8 bg-white overflow-y-auto">
-        <div className="w-full max-w-[520px]">
+        <div className="w-full max-w-[520px] animate-fade-in-up">
           <div className="text-center mb-9">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Choose Your Role
@@ -41,7 +41,7 @@ const RoleSelectionPage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {/* Admin Card */}
-            <div className="border-2 border-indigo-200 rounded-2xl p-7 cursor-pointer transition-all hover:border-indigo-400 hover:shadow-lg">
+            <div className="border-2 border-indigo-200 rounded-2xl p-7 cursor-pointer transition-all duration-300 hover:border-indigo-400 hover:shadow-lg hover:-translate-y-1">
               <h3 className="text-xl font-bold text-indigo-600 mb-2">
                 Admin
               </h3>
@@ -62,7 +62,7 @@ const RoleSelectionPage: React.FC = () => {
             </div>
 
             {/* User Card */}
-            <div className="border-2 border-gray-200 rounded-2xl p-7 cursor-pointer transition-all hover:border-gray-400 hover:shadow-lg">
+            <div className="border-2 border-gray-200 rounded-2xl p-7 cursor-pointer transition-all duration-300 hover:border-gray-400 hover:shadow-lg hover:-translate-y-1">
               <h3 className="text-xl font-bold text-gray-900 mb-2">
                 User
               </h3>
