@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Sidebar: React.FC = () => {
-  const { user, logout, isAdmin } = useAuth();
+  const { logout, isAdmin } = useAuth();
 
   const navItems = isAdmin
     ? [
