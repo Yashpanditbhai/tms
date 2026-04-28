@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../app/store';
 import { setRole } from '../features/authSlice';
 import AuthIllustration from '../components/AuthIllustration';
-import userService from '../services/userService';
+import api from '../services/api';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
 
@@ -15,12 +15,10 @@ const RoleSelectionPage: React.FC = () => {
 
   const handleRoleSelect = async (role: 'admin' | 'user') => {
     try {
-      if (user) {
-        await userService.updateUserRole(user._id, role);
-        dispatch(setRole(role));
-        toast.success(`Continuing as ${role}`);
-        navigate(role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
-      }
+      await api.patch('/auth/select-role', { role });
+      dispatch(setRole(role));
+      toast.success(`Continuing as ${role}`);
+      navigate(role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
     } catch {
       dispatch(setRole(role));
       navigate(role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
